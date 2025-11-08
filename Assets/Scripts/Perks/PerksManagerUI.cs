@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -11,6 +12,12 @@ public class PerksManagerUI : MonoBehaviour
     [SerializeField] private GameObject perkSelectionCardUI;
     [SerializeField] private List<Perk> perksSelectionCards;
     [SerializeField] private List<GameObject> perksSelectionCardsUI;
+    [SerializeField] private GameManager gameManager;
+
+    private void Start()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
 
     public void ChangePerks(List<Perk> perksSelected)
     {
@@ -51,5 +58,6 @@ public class PerksManagerUI : MonoBehaviour
         
         perksSelectionCardsUI.RemoveRange(0, perksSelectionCardsUI.Count);
         perksSelectionCards.RemoveRange(0, perksSelectionCards.Count);
+        gameManager.PauseGame();
     }
 }
