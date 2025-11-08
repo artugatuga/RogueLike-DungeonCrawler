@@ -9,6 +9,8 @@ public class MeleeEnemyController : MonoBehaviour
     private GameObject player;
     private GameObject Hitbox;
     private bool isAttacking = false;
+    
+    private float rotationSpeed = 5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,9 +25,15 @@ public class MeleeEnemyController : MonoBehaviour
         agent.SetDestination(player.transform.position);
         agent.isStopped = Vector3.Distance(transform.position, player.transform.position) < 3f;
 
-        if (agent.isStopped && !isAttacking)
+        // Only look at player when stopped
+        if (agent.isStopped)
         {
-            StartCoroutine(Attack());
+            LookAtPlayer();
+        
+            if (!isAttacking)
+            {
+                StartCoroutine(Attack());
+            }
         }
     }
 
@@ -39,4 +47,22 @@ public class MeleeEnemyController : MonoBehaviour
         isAttacking = false;
     }
 
+    void LookAtPlayer()
+    {
+        if (player == null) return;
+
+        // Get direction to player (ignore Y-axis for typical ground enemies)
+        Vector3 direction = player.transform.position - transform.position;
+        direction.y = 0; // This keeps the enemy upright
+
+        // Only rotate if there's a meaningful direction
+        if (direction != Vector3.zero)
+        {
+            // Create target rotation
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            
+            // Smoothly rotate towards target
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+    }
 }
