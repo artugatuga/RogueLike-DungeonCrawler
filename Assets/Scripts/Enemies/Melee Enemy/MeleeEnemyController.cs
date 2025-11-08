@@ -23,7 +23,6 @@ public class MeleeEnemyController : MonoBehaviour
     void Update()
     {
         agent.SetDestination(player.transform.position);
-        agent.isStopped = Vector3.Distance(transform.position, player.transform.position) < 3f;
 
         // Only look at player when stopped
         if (agent.isStopped)

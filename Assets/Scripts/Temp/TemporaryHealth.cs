@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TemporaryHealth : MonoBehaviour, IDamageable
 {
+    [SerializeField]
     private float Health = 100f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
