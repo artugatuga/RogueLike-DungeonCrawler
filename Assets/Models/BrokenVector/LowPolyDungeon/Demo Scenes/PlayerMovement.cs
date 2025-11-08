@@ -8,11 +8,11 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody rb;
-    public float acceleration = 12f;
 
     [SerializeField] private GameObject Camera;
     private Vector3 Orientation;
     
+    [SerializeField] private PlayerManager PlayerManager;
 
     private void Awake()
     {
@@ -65,8 +65,8 @@ public class PlayerMovement : MonoBehaviour
             //transform.position += Camera.transform.right * acceleration * Time.deltaTime;
             moveHorizontal += 1;
         }
-        moveHorizontal *= acceleration * Time.deltaTime;
-        moveVertical *= acceleration * Time.deltaTime;
+        moveHorizontal *= PlayerManager.speed * Time.deltaTime;
+        moveVertical *= PlayerManager.speed * Time.deltaTime;
         movement = new Vector3(moveHorizontal/2, 0, moveVertical);
         Quaternion rotation = Quaternion.Euler(0f, +45f, 0f);
         movement = rotation * movement;
@@ -89,7 +89,5 @@ public class PlayerMovement : MonoBehaviour
             //transform.forward = Vector3.Slerp(transform.forward, finalDir, Time.deltaTime * acceleration);
             transform.LookAt(finalDir);
         }
-
     }
-    
 }
