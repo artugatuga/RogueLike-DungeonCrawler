@@ -9,6 +9,8 @@ public class RangedEnemyController : MonoBehaviour
     private GameObject player;
     private bool isAttacking = false;
     
+    private Transform projectileSpawn;
+    
     private float rotationSpeed = 5f;
     
     [SerializeField] private GameObject projectilePrefab;
@@ -20,6 +22,7 @@ public class RangedEnemyController : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
+        projectileSpawn = transform.Find("ProjectileSpawn");
     }
 
     // Update is called once per frame
@@ -44,7 +47,8 @@ public class RangedEnemyController : MonoBehaviour
     IEnumerator Attack()
     {
         isAttacking = true;
-        Instantiate(projectilePrefab, player.transform.position, Quaternion.identity);
+        GameObject projectile = Instantiate(projectilePrefab, projectileSpawn.position, transform.rotation);
+        projectile.GetComponent<ProjectileMovement>().direction = transform.forward;
         yield return new WaitForSeconds(2f);
         isAttacking = false;
     }
@@ -53,17 +57,12 @@ public class RangedEnemyController : MonoBehaviour
     {
         if (player == null) return;
 
-        // Get direction to player (ignore Y-axis for typical ground enemies)
         Vector3 direction = player.transform.position - transform.position;
-        direction.y = 0; // This keeps the enemy upright
-
-        // Only rotate if there's a meaningful direction
+        
         if (direction != Vector3.zero)
         {
-            // Create target rotation
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             
-            // Smoothly rotate towards target
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }

@@ -9,10 +9,8 @@ public class MeleeEnemyAttack : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         IDamageable damageable = other.GetComponent<IDamageable>();
-        if (damageable == null) return;
-        
         if (!other.CompareTag("Player")) return;
         
-        damageable.TakeDamage(damage, gameObject);
+        damageable?.TakeDamage(damage, gameObject);
     }
 }

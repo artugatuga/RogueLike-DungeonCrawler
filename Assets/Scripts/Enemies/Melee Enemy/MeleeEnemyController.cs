@@ -9,6 +9,9 @@ public class MeleeEnemyController : MonoBehaviour
     private GameObject player;
     private GameObject Hitbox;
     private bool isAttacking = false;
+
+    [SerializeField] private float attackCooldown = 3f;
+    [SerializeField] private float attackDuration = 0.3f;
     
     private float rotationSpeed = 5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -41,9 +44,9 @@ public class MeleeEnemyController : MonoBehaviour
     {
         isAttacking = true;
         Hitbox.SetActive(true);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(attackDuration);
         Hitbox.SetActive(false);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(attackCooldown);
         isAttacking = false;
     }
 
