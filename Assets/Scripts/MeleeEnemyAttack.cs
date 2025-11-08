@@ -1,16 +1,18 @@
+using System;
 using UnityEngine;
 
 public class MeleeEnemyAttack : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    float damage;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
+        IDamageable damageable = other.GetComponent<IDamageable>();
+        if (damageable == null) return;
         
+        if (!other.CompareTag("Player")) return;
+        
+        damageable.TakeDamage(damage, gameObject);
     }
 }
