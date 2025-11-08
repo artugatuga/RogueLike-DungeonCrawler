@@ -31,7 +31,6 @@ public class PerksManager : MonoBehaviour
             int randomNum = Random.Range(0, perks.Length);
             if (!perksAlreadySelected.Contains(randomNum))
             {
-                Debug.Log(randomNum);
                 perksSelected[i] = randomNum;
                 perksSelectedList.Add(perksSelected[i]);
                 perksAlreadySelected.Add(randomNum);
