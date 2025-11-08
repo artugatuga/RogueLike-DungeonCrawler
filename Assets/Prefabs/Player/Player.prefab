@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   rb: {fileID: 2734202536771428967}
+  animator: {fileID: 8620524914534106914}
   Camera: {fileID: 0}
   PlayerManager: {fileID: 19356610895040462}
 --- !u!136 &1950208275596894281
@@ -200,6 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   hitBox: {fileID: 1616542577226624094}
+  animator: {fileID: 8620524914534106914}
 --- !u!114 &1327389360103736226
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,7 +7,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private static readonly int Moving = Animator.StringToHash("Moving");
     public Rigidbody rb;
+    
+    [SerializeField] Animator animator;
 
     [SerializeField] private GameObject Camera;
     private Vector3 Orientation;
@@ -39,18 +42,22 @@ public class PlayerMovement : MonoBehaviour
         float moveHorizontal = 0;
         float moveVertical = 0;
         Vector3 movement;
+        animator.SetBool(Moving, false);
+
         
         if (Keyboard.current.wKey.isPressed)
         {
             //rb.AddForce((Camera.transform.forward * acceleration * Time.deltaTime), ForceMode.VelocityChange);
             //transform.position += Camera.transform.forward * acceleration * Time.deltaTime;
             moveVertical += 1;
+            animator.SetBool(Moving, true);
         }
         if (Keyboard.current.sKey.isPressed)
         {
             //rb.AddForce((-Camera.transform.forward * acceleration * Time.deltaTime), ForceMode.VelocityChange);
             //transform.position -= Camera.transform.forward * acceleration * Time.deltaTime;
             moveVertical -= 1;
+            animator.SetBool(Moving, true);
         }
         
         if (Keyboard.current.aKey.isPressed)
@@ -58,12 +65,14 @@ public class PlayerMovement : MonoBehaviour
             //rb.AddForce((-Camera.transform.right * acceleration * Time.deltaTime), ForceMode.Acceleration);
             //transform.position -= Camera.transform.right * acceleration * Time.deltaTime;
             moveHorizontal -= 1;
+            animator.SetBool(Moving, true);
         }
         if (Keyboard.current.dKey.isPressed)
         {
             //rb.AddForce((Camera.transform.right * acceleration * Time.deltaTime), ForceMode.VelocityChange);
             //transform.position += Camera.transform.right * acceleration * Time.deltaTime;
             moveHorizontal += 1;
+            animator.SetBool(Moving, true);
         }
         moveHorizontal *= PlayerManager.speed;
         moveVertical *= PlayerManager.speed;
