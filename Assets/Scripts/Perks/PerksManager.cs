@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class PerksManager : MonoBehaviour
 {
@@ -9,33 +11,44 @@ public class PerksManager : MonoBehaviour
     [SerializeField] private Perk[] perks;
     [SerializeField] private int maxPerksOnSelection;
     [SerializeField] private PerksManagerUI managerUI;
-    
-    void Start()
+    [SerializeField] private GameManager gameManager;
+
+    private void Start()
     {
-        RandomizePerkSelection();
+        gameManager = FindObjectOfType<GameManager>();
     }
-    
-    void RandomizePerkSelection()
+
+    public void RandomizePerkSelection()
     {
         int[] perksSelected = new int[maxPerksOnSelection];
         List<int> perksAlreadySelected = new List<int>();
         List<int> perksSelectedList = new List<int>();
+
+        int tries = 0;
         
         for (int i = 0; i < maxPerksOnSelection; i++)
         {
-            if (!perksAlreadySelected.Contains(perksSelected[i]))
+            int randomNum = Random.Range(0, perks.Length);
+            if (!perksAlreadySelected.Contains(randomNum))
             {
-                int randomNum = Random.Range(0, perks.Length);
+                Debug.Log(randomNum);
                 perksSelected[i] = randomNum;
                 perksSelectedList.Add(perksSelected[i]);
                 perksAlreadySelected.Add(randomNum);
             }
-            else
+            else if (tries <= 1000)
             {
                 i--;
+                tries++;
+            }
+            else
+            {
+                Debug.LogError("To many tries");
+                break;
             }
         }
         
+        gameManager.PauseGame();
         ShowPerkSelection(perksSelectedList);
     }
 
@@ -57,7 +70,11 @@ public class PerksManager : MonoBehaviour
         if (Keyboard.current.eKey.wasPressedThisFrame)
         {
             Debug.Log("Pressed E");
-            perks[0].CallPerkFunction();
+
+            if (gameManager != null)
+            {
+                
+            }
         }
     }
 }
