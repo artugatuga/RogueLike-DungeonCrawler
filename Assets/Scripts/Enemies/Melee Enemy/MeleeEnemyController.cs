@@ -5,10 +5,14 @@ using UnityEngine.AI;
 
 public class MeleeEnemyController : MonoBehaviour
 {
+    private static readonly int Attack1 = Animator.StringToHash("Attack1");
+    private static readonly int IsMoving = Animator.StringToHash("isMoving");
     private NavMeshAgent agent;
     private GameObject player;
     private GameObject Hitbox;
     private bool isAttacking = false;
+    
+    private Animator animator;
 
     [SerializeField] private float attackCooldown = 3f;
     [SerializeField] private float attackDuration = 0.3f;
@@ -20,17 +24,24 @@ public class MeleeEnemyController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
         Hitbox = transform.GetChild(1).gameObject;
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        agent.SetDestination(player.transform.position);
+
         agent.isStopped = Vector3.Distance(transform.position, player.transform.position) < 3f;
 
+        if (!agent.isStopped)
+        {
+            animator.SetBool(IsMoving, true);
+            agent.SetDestination(player.transform.position);
+        }
         // Only look at player when stopped
         if (agent.isStopped)
         {
+            animator.SetBool(IsMoving, false);
             LookAtPlayer();
         
             if (!isAttacking)
@@ -40,9 +51,10 @@ public class MeleeEnemyController : MonoBehaviour
         }
     }
 
-    IEnumerator Attack()
+    public IEnumerator Attack()
     {
         isAttacking = true;
+        animator.SetTrigger(Attack1);
         Hitbox.SetActive(true);
         yield return new WaitForSeconds(attackDuration);
         Hitbox.SetActive(false);
