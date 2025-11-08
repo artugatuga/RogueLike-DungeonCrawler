@@ -65,12 +65,13 @@ public class PlayerMovement : MonoBehaviour
             //transform.position += Camera.transform.right * acceleration * Time.deltaTime;
             moveHorizontal += 1;
         }
-        moveHorizontal *= PlayerManager.speed * Time.deltaTime;
-        moveVertical *= PlayerManager.speed * Time.deltaTime;
+        moveHorizontal *= PlayerManager.speed;
+        moveVertical *= PlayerManager.speed;
         movement = new Vector3(moveHorizontal/2, 0, moveVertical);
         Quaternion rotation = Quaternion.Euler(0f, +45f, 0f);
         movement = rotation * movement;
-        transform.position += movement;
+        
+        rb.linearVelocity = movement;
     }
 
     private void Look()
@@ -84,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction * 100f, Color.yellow);
         if (Physics.Raycast(ray, out hit, 100f, mask))
         {
-            Vector3 finalDir = new Vector3(hit.transform.position.x, 0, hit.transform.position.z);
+            Vector3 finalDir = new Vector3(hit.point.x, 0, hit.point.z);
 
             //transform.forward = Vector3.Slerp(transform.forward, finalDir, Time.deltaTime * acceleration);
             transform.LookAt(finalDir);
