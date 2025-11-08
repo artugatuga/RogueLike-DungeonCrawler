@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,6 +10,11 @@ public class RangedEnemyController : MonoBehaviour
     private bool isAttacking = false;
     
     private float rotationSpeed = 5f;
+    
+    [SerializeField] private GameObject projectilePrefab;
+    
+    [SerializeField] private float maxDistance = 10f;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,9 +25,28 @@ public class RangedEnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (player == null) return;
         agent.destination = player.transform.position;
 
-        if (false) ;
+        agent.isStopped = (Vector3.Distance(player.transform.position, agent.transform.position) <= maxDistance);
+
+        if (agent.isStopped)
+        {
+            LookAtPlayer();
+
+            if (!isAttacking)
+            {
+                StartCoroutine(Attack());
+            }
+        }
+    }
+    
+    IEnumerator Attack()
+    {
+        isAttacking = true;
+        Instantiate(projectilePrefab, player.transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(2f);
+        isAttacking = false;
     }
     
     void LookAtPlayer()
