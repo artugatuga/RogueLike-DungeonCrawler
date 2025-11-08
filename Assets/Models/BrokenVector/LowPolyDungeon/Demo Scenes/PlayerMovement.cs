@@ -1,39 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public InputActionAsset InputActions;
     public Rigidbody rb;
     public float acceleration = 12f;
-    
-    [SerializeField] private float maxSpeed = 10f;
 
     [SerializeField] private GameObject Camera;
     private Vector3 Orientation;
     
-    private InputAction moveAction;
-    private Vector2 moveAmount;
-    private InputAction lookAction;
-    private Vector2 lookDirection;
-
-    private void OnEnable()
-    {
-        InputActions.FindActionMap("Player").Enable();
-    }
-    
-    private void OnDisable()
-    {
-        InputActions.FindActionMap("Player").Disable();
-    }
 
     private void Awake()
     {
-        moveAction = InputSystem.actions.FindAction("Move");
-        lookAction = InputSystem.actions.FindAction("Look");
         Orientation = new Vector3(Camera.transform.forward.x, 0, Camera.transform.forward.z);
     }
     
@@ -44,14 +26,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        moveAmount = moveAction.ReadValue<Vector2>();
-        lookDirection = lookAction.ReadValue<Vector2>();
     }
 
     void FixedUpdate()
     {
-        //if (maxSpeed < rb.linearVelocity.magnitude) return;
         Move();
+        Look();
     }
 
     private void Move()
@@ -92,4 +72,24 @@ public class PlayerMovement : MonoBehaviour
         movement = rotation * movement;
         transform.position += movement;
     }
+
+    private void Look()
+    {
+        Ray ray = Camera.GetComponent<Camera>().ScreenPointToRay(Mouse.current.position.ReadValue());
+        RaycastHit hit;
+        
+        int groundLayer = LayerMask.NameToLayer("Ground");
+        int mask = 1 << groundLayer;
+
+        Debug.DrawRay(ray.origin, ray.direction * 100f, Color.yellow);
+        if (Physics.Raycast(ray, out hit, 100f, mask))
+        {
+            Vector3 finalDir = new Vector3(hit.transform.position.x, 0, hit.transform.position.z);
+
+            //transform.forward = Vector3.Slerp(transform.forward, finalDir, Time.deltaTime * acceleration);
+            transform.LookAt(finalDir);
+        }
+
+    }
+    
 }
