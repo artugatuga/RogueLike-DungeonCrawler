@@ -49,13 +49,21 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
     
     public void TakeDamage(float damage, GameObject source)
     {
-        Health -= damage;
+        float armor = 1;
+
+        if (gameObject.CompareTag("Player"))
+        {
+            armor = playerManager.armor;
+        }
+        
         
         float maxHealth = 0;
         if (playerManager)
         {
             maxHealth = playerManager.maxHealth;
         }
+        
+        Health -= damage / armor;
         
         Health = Mathf.Clamp(Health, 0, maxHealth);
         
@@ -80,12 +88,15 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
             maxHealth = playerManager.maxHealth;
         }
         
+        OnHealthChanged.Invoke();
+        
         Health = Mathf.Clamp(Health, 0, maxHealth);
     }
     
     public void AddToMaxHealth(float addHealth)
     {
         playerManager.maxHealth += addHealth;
+        OnHealthChanged.Invoke();
     }
 
     void Update()
