@@ -151,6 +151,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   attackCooldown: 5
   attackDuration: 0.3
+  audioSource: {fileID: 0}
+  attackSound: {fileID: 0}
 --- !u!114 &3356345822829150781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,10 +165,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed67d356659460143a061065e06b1acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TemporaryHealth
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
   Health: 200
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls: []
+  audioSource: {fileID: 0}
+  DeathSound: {fileID: 0}
+  deathScreen: {fileID: 0}
 --- !u!136 &544204871631102286
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -230,7 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   perkItemPrefab: {fileID: 3509464816072538751, guid: 5063571c93625b54f9e2eebd5c4c1784, type: 3}
-  dropChance: 10
+  dropChance: 100
 --- !u!1001 &4550950190138454308
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -19,8 +19,8 @@ public class Perk : MonoBehaviour
     private PlayerManager playerManager;
     private TemporaryHealth playerHealth;
     
-    private Action<int> perkApplyCallback;
-    private Action<int> perkRemoveCallback;
+    public Action<int> perkApplyCallback {get; set; }
+    public Action<int> perkRemoveCallback {get; set; }
     
     void Start()
     {

@@ -14,7 +14,7 @@ public class PerksManagerUI : MonoBehaviour
     [SerializeField] private List<GameObject> perksSelectionCardsUI;
     [SerializeField] private GameManager gameManager;
     private Inventory inventory;
-
+    
     private void Start()
     {
         gameManager = FindFirstObjectByType<GameManager>();
