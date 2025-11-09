@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
@@ -11,12 +12,14 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
     private float Health = 100f;
     public UnityEvent OnTakeDamage;
     
+    private NavMeshAgent agent;
     private Animator animator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
         OnTakeDamage.AddListener(CheckIfDead);
+        agent = GetComponent<NavMeshAgent>();
     }
     public void TakeDamage(float damage, GameObject source)
     {
@@ -30,6 +33,7 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
     {
         if (Health <= 0f)
         {
+            agent.isStopped = true;
             animator.SetTrigger(Death);
             if (this.gameObject.CompareTag("Player"))
             {

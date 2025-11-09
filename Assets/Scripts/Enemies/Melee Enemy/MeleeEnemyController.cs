@@ -31,7 +31,7 @@ public class MeleeEnemyController : MonoBehaviour
     void Update()
     {
 
-        agent.isStopped = Vector3.Distance(transform.position, player.transform.position) < 3f;
+        agent.isStopped = Vector3.Distance(transform.position, player.transform.position) < agent.radius * 3f;
 
         if (!agent.isStopped)
         {
