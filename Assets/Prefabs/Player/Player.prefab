@@ -157,6 +157,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SwordHit
   PlayerManager: {fileID: 1327389360103736226}
   myParticleSystem: {fileID: 6939262668755862996}
+  myAudioSource: {fileID: 0}
+  hitSound: {fileID: 0}
 --- !u!1 &5244342150541677823
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,7 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 986bc71f9ee8f824dbb32db2b4cfb47e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
-  hitBox: {fileID: 1616542577226624094}
+  hitBox: {fileID: 3857042398688731635}
   audioSource: {fileID: 8417871384178755999}
   swordSound: {fileID: 8300000, guid: ec6b90b0e15398240a42cd72f3901398, type: 3}
   animator: {fileID: 8620524914534106914}
@@ -312,6 +314,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed67d356659460143a061065e06b1acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TemporaryHealth
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
   Health: 100
   OnTakeDamage:
     m_PersistentCalls:
