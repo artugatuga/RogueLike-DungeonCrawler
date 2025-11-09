@@ -9,6 +9,8 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
 {
     private static readonly int Death = Animator.StringToHash("Death");
 
+    public UnityEvent OnHealthChanged = new UnityEvent();
+    
     [SerializeField]
     private float Health = 100f;
     public UnityEvent OnTakeDamage;
@@ -37,6 +39,7 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
         animator = GetComponentInChildren<Animator>();
         OnTakeDamage.AddListener(CheckIfDead);
         playerManager = FindFirstObjectByType<PlayerManager>();
+        OnHealthChanged.Invoke();
         if (gameObject.CompareTag("Enemy"))
         {
             itemSpawner = gameObject.GetComponent<ItemSpawner>();
@@ -56,6 +59,7 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
         
         Health = Mathf.Clamp(Health, 0, maxHealth);
         
+        OnHealthChanged.Invoke();
         OnTakeDamage.Invoke();
         
         Debug.Log(gameObject.name + " taking damage");
@@ -161,5 +165,10 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
             if(!dead) agent.enabled = true;
             return;
         }
+    }
+
+    public float GetPlayerHealth()
+    {
+        return Health;
     }
 }
