@@ -770,6 +770,10 @@ PrefabInstance:
       propertyPath: Camera
       value: 
       objectReference: {fileID: 884571231}
+    - target: {fileID: 8964743692656102266, guid: 20ffc03e150b34e41aef6d134fa46637, type: 3}
+      propertyPath: walkSound
+      value: 
+      objectReference: {fileID: 8300000, guid: a34e9930020eb7b4bbd9648e896bda9e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
