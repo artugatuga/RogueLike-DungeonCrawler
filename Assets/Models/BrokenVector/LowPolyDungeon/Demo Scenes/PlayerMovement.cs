@@ -98,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
 
             //transform.forward = Vector3.Slerp(transform.forward, finalDir, Time.deltaTime * acceleration);
             transform.LookAt(finalDir);
+            transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
         }
     }
 }
