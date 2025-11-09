@@ -16,6 +16,7 @@ public class PerkItem : MonoBehaviour, IInteractable
         if (perksManager != null)
         {
             perksManager.RandomizePerkSelection();
+            Destroy(gameObject);
         }
     }
 }
