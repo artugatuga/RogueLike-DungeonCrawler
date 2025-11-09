@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 4706621105799799851}
   - component: {fileID: 5523571515198960774}
   - component: {fileID: 7911690130601387311}
+  - component: {fileID: 8037356731752143709}
   m_Layer: 7
   m_Name: Cactoro
   m_TagString: Enemy
@@ -120,6 +121,20 @@ MonoBehaviour:
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8037356731752143709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014983961438189676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92aea15dcb7a45042971b5ff0808f5f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  perkItemPrefab: {fileID: 3509464816072538751, guid: 5063571c93625b54f9e2eebd5c4c1784, type: 3}
+  dropChance: 10
 --- !u!1001 &8901119665621392846
 PrefabInstance:
   m_ObjectHideFlags: 0

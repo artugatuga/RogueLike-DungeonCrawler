@@ -11,6 +11,8 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
     [SerializeField]
     private float Health = 100f;
     public UnityEvent OnTakeDamage;
+
+    private ItemSpawner itemSpawner;
     
     private NavMeshAgent agent;
     private Animator animator;
@@ -21,8 +23,12 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
     {
         animator = GetComponentInChildren<Animator>();
         OnTakeDamage.AddListener(CheckIfDead);
-        agent = GetComponent<NavMeshAgent>();
         playerManager = FindFirstObjectByType<PlayerManager>();
+        if (gameObject.CompareTag("Enemy"))
+        {
+            itemSpawner = gameObject.GetComponent<ItemSpawner>();
+            agent = GetComponent<NavMeshAgent>();
+        }
     }
     
     public void TakeDamage(float damage, GameObject source)
@@ -86,6 +92,7 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
     IEnumerator DestroyGameObject()
     {
         yield return new WaitForSeconds(1.5f);
+        itemSpawner.SpawnItem();
         Destroy(this.gameObject);
     }
 }
