@@ -122,8 +122,8 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
             if (this.gameObject.CompareTag("Enemy"))
             {
                 dead = true;
-                agent.enabled = false;
                 agent.isStopped = true;
+                agent.enabled = false;
                 agent.enabled = false;
                 StartCoroutine(DestroyGameObject());
             }
