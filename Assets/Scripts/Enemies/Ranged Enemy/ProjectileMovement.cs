@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class ProjectileMovement : MonoBehaviour
 {
     [SerializeField] private float speed = 15f;
-    [SerializeField] private float lifetime = 5f;
+    [SerializeField] private float lifetime = 3f;
 
     public float damage;
     public Vector3 direction;
@@ -34,7 +34,6 @@ public class ProjectileMovement : MonoBehaviour
     {
         if (!other.CompareTag("Player"))
         {
-            Destroy(gameObject);
             return;
         }
         
