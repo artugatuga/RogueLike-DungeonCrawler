@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3498125130201722604}
   - component: {fileID: 8368412976904234079}
   - component: {fileID: 1831534768541396195}
-  - component: {fileID: 8681811077485710230}
   m_Layer: 0
   m_Name: Hitbox
   m_TagString: Untagged
@@ -68,19 +67,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwordHit
   PlayerManager: {fileID: 1327389360103736226}
---- !u!114 &8681811077485710230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1616542577226624094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5e320850f556f349b9876690cb4dc74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SwordHit
-  PlayerManager: {fileID: 0}
 --- !u!1 &5244342150541677823
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,7 +86,7 @@ GameObject:
   - component: {fileID: 6619389759580047230}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

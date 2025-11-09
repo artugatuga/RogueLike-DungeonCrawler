@@ -1,0 +1,81 @@
+using UnityEngine;
+
+public class StartRoom : MonoBehaviour
+{
+    [SerializeField] private int dificultyLevel = 1;
+[SerializeField] private GameObject slimePrefab;
+[SerializeField] private GameObject tankPrefab;
+[SerializeField] private GameObject cactusPrefab;
+[SerializeField] private GameObject enemyParent;
+[SerializeField] private BoxCollider arenaBox;
+
+private int amountOf;
+private int amountOfMelee;
+private int amountOfTank;
+private int amountOfRange;
+
+
+
+// Start is called before the first frame update
+void OnTriggerEnter(Collider other)
+{
+    if (!other.CompareTag("Player")) return;
+    
+    amountOf = Mathf.RoundToInt((3 * Mathf.Sqrt(dificultyLevel)));
+        if (dificultyLevel > 7)
+        {
+            for (int i = 0; i < Random.Range(1,2); i++)
+            {
+                amountOfTank++;
+                amountOf--;
+            }
+        }
+        if (dificultyLevel > 3)
+        {
+            for (int i = 0; i < amountOf-amountOf/1.5; i++)
+            {
+                amountOfRange++;
+                amountOf--;
+            }
+        }
+        for (int i = 0; i < amountOf; i++)
+        {
+            amountOfMelee++;
+        }
+        
+        StartThisRoom();
+}
+
+
+void StartThisRoom()
+{
+    for (int i = 0; i < amountOfMelee; i++)
+    {
+        //Vector3 randomTile =tiles[Random.Range(0, tiles.Count)];
+        Instantiate(slimePrefab, GetRandomPosition() + Vector3.up*2, Quaternion.identity ,enemyParent.transform);
+        amountOfMelee--;
+    }
+    for (int i = 0; i < amountOfRange; i++)
+    {
+        //Vector3 randomTile =tiles[Random.Range(0, tiles.Count)];
+        Instantiate(cactusPrefab, GetRandomPosition() + Vector3.up*2, Quaternion.identity ,enemyParent.transform);
+        amountOfRange--;
+    }
+    for (int i = 0; i < amountOfTank; i++)
+    {
+        //Vector3 randomTile =tiles[Random.Range(0, tiles.Count)];
+        Instantiate(tankPrefab, GetRandomPosition() + Vector3.up*4, Quaternion.identity ,enemyParent.transform);
+        amountOfTank--;
+    }
+}
+
+public Vector3 GetRandomPosition()
+{
+    Vector3 center = arenaBox.center;
+    Vector3 size = arenaBox.size;
+    float x = Random.Range(-size.x / 2f, size.x / 2f);
+    float z = Random.Range(-size.z / 2f, size.z / 2f);
+    return arenaBox.transform.TransformPoint(center + new Vector3(x, 0, z));
+}
+
+}
