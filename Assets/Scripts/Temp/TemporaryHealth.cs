@@ -41,6 +41,7 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
         
         Debug.Log(gameObject.name + " taking damage");
         Debug.LogWarning("Current Health: " + Health);
+        // if (gameObject.CompareTag("Enemy")) GetComponent<Rigidbody>().linearVelocity = transform.forward * -100f;
     }
     public void AddHealth(float addHealth)
     {
@@ -84,7 +85,7 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
 
     IEnumerator DestroyGameObject()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
         Destroy(this.gameObject);
     }
 }
