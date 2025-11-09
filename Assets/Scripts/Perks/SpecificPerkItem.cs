@@ -1,14 +1,9 @@
-using System;
 using UnityEngine;
 
 public class SpecificPerkItem : MonoBehaviour, IInteractable
 {
-    private PerkType perkType;
-    private ExtraPerkType extraPerkType;
-    private OtherPerkType otherPerkType;
-    
+    private Perk perkData;
     private Inventory inventory;
-    private Perk perkComponent;
 
     private void Start()
     {
@@ -17,14 +12,15 @@ public class SpecificPerkItem : MonoBehaviour, IInteractable
 
     public void SetPerk(Perk perk)
     {
-        perkComponent = perk;
+        perkData = perk;
     }
     
     void IInteractable.Interact(GameObject source)
     {
-        if (inventory != null)
+        if (inventory != null && perkData != null)
         {
-            inventory.AddToInventory(perkComponent);
+            inventory.AddToInventory(perkData);
+            Destroy(gameObject);
         }
     }
 }

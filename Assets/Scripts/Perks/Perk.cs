@@ -1,28 +1,23 @@
 using System;
-using UnityEngine;using UnityEngine.Rendering;
+using UnityEngine;
 
-
-public enum PerkType {Extra, Other};
-public enum ExtraPerkType {None, Damage, Health, Defense, Crit, Speed};
-
-public enum OtherPerkType {None, FlameTrail, EnemyExplode, DamageOverTime, SlowEnemies, LifeSteal, SizeAttack};
+public enum PerkType { Extra, Other };
+public enum ExtraPerkType { None, Damage, Health, Defense, Crit, Speed };
+public enum OtherPerkType { None, FlameTrail, EnemyExplode, DamageOverTime, SlowEnemies, LifeSteal, SizeAttack };
 
 public class Perk : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [field:SerializeField] public PerkType perkType { get; set; }
+    [field:SerializeField] public ExtraPerkType extraPerkType { get; set; }
+    [field:SerializeField] public OtherPerkType otherPerkType { get; set; }
     
-    [field:SerializeField] public PerkType perkType {get; set;}
-    [field:SerializeField] public ExtraPerkType extraPerkType {get; set;}
-    [field:SerializeField] public OtherPerkType otherPerkType {get; set;}
-    
-    [SerializeField] private float extraModifier;
-    [SerializeField] private int timesModifierUsed;
+    [SerializeField] private float baseModifier;
     
     private PlayerManager playerManager;
     private TemporaryHealth playerHealth;
     
-    private Action perkCallback;
-    private Action perkRemoveCallback;
+    private Action<int> perkApplyCallback;
+    private Action<int> perkRemoveCallback;
     
     void Start()
     {
@@ -34,24 +29,24 @@ public class Perk : MonoBehaviour
             switch (extraPerkType)
             {
                 case ExtraPerkType.Damage:
-                    perkCallback = ExtraDamage;
-                    perkRemoveCallback = DropDamage;
+                    perkApplyCallback = ApplyDamage;
+                    perkRemoveCallback = RemoveDamage;
                     break;
                 case ExtraPerkType.Health:
-                    perkCallback = ExtraHealth;
-                    perkRemoveCallback = DropHealth;
+                    perkApplyCallback = ApplyHealth;
+                    perkRemoveCallback = RemoveHealth;
                     break;
                 case ExtraPerkType.Defense:
-                    perkCallback = ExtraDefense;
-                    perkRemoveCallback = DropDefense;
+                    perkApplyCallback = ApplyDefense;
+                    perkRemoveCallback = RemoveDefense;
                     break;
                 case ExtraPerkType.Crit:
-                    perkCallback = ExtraCrit;
-                    perkRemoveCallback = DropCrit;
+                    perkApplyCallback = ApplyCrit;
+                    perkRemoveCallback = RemoveCrit;
                     break;
                 case ExtraPerkType.Speed:
-                    perkCallback = ExtraSpeed;
-                    perkRemoveCallback = DropSpeed;
+                    perkApplyCallback = ApplySpeed;
+                    perkRemoveCallback = RemoveSpeed;
                     break;
             }
         }
@@ -60,170 +55,213 @@ public class Perk : MonoBehaviour
             switch (otherPerkType)
             {
                 case OtherPerkType.FlameTrail:
-                    perkCallback = FlameTrail;
-                    perkRemoveCallback = DropSpeed;
+                    perkApplyCallback = ApplyFlameTrail;
+                    perkRemoveCallback = RemoveFlameTrail;
                     break;
                 case OtherPerkType.EnemyExplode:
-                    perkCallback = EnemyExplode;
-                    perkRemoveCallback = DropSpeed;
+                    perkApplyCallback = ApplyEnemyExplode;
+                    perkRemoveCallback = RemoveEnemyExplode;
                     break;
                 case OtherPerkType.DamageOverTime:
-                    perkCallback = DamageOverTime;
-                    perkRemoveCallback = DropSpeed;
+                    perkApplyCallback = ApplyDamageOverTime;
+                    perkRemoveCallback = RemoveDamageOverTime;
                     break;
                 case OtherPerkType.SlowEnemies:
-                    perkCallback = SlowEnemies;
-                    perkRemoveCallback = DropSpeed;
+                    perkApplyCallback = ApplySlowEnemies;
+                    perkRemoveCallback = RemoveSlowEnemies;
                     break;
                 case OtherPerkType.LifeSteal:
-                    perkCallback = LifeSteal;
-                    perkRemoveCallback = DropSpeed;
+                    perkApplyCallback = ApplyLifeSteal;
+                    perkRemoveCallback = RemoveLifeSteal;
                     break;
                 case OtherPerkType.SizeAttack:
-                    perkCallback = SizeAttack;
-                    perkRemoveCallback = DropSpeed;
+                    perkApplyCallback = ApplySizeAttack;
+                    perkRemoveCallback = RemoveSizeAttack;
                     break;
             }
         }
     }
 
-    public void CallPerkFunction()
+    public void ApplyPerkEffect(int stackCount)
     {
-        timesModifierUsed++;
-        Debug.Log(extraPerkType);
-        Debug.Log(perkCallback);
-        perkCallback?.Invoke();
+        perkApplyCallback?.Invoke(stackCount);
     }
     
-    public void CallRemovePerkFunction()
+    public void RemovePerkEffect(int stackCount)
     {
-        timesModifierUsed--;
-        Debug.Log(extraPerkType);
-        perkRemoveCallback?.Invoke();
+        perkRemoveCallback?.Invoke(stackCount);
     }
     
-    //Extras
-    
-    void ExtraDamage()
+    // Extra Perks
+    void ApplyDamage(int stackCount)
     {
         if (playerManager)
         {
-            extraModifier = extraModifier/Mathf.Sqrt(Mathf.Sqrt(timesModifierUsed));
-            playerManager.damage *= (1 + extraModifier);
-        }
-    }
-    void DropDamage()
-    {
-        if (playerManager)
-        {
-            playerManager.damage /= (1 + extraModifier);
+            float totalModifier = CalculateTotalModifier(stackCount);
+            playerManager.damage = playerManager.initalDamage * (1 + totalModifier);
         }
     }
     
-    void ExtraHealth()
+    void RemoveDamage(int stackCount)
+    {
+        if (playerManager)
+        {
+            float totalModifier = CalculateTotalModifier(stackCount);
+            playerManager.damage = playerManager.initalDamage * (1 + totalModifier);
+        }
+    }
+    
+    void ApplyHealth(int stackCount)
     {
         if (playerHealth)
         {
-            playerHealth.AddToMaxHealth(extraModifier);
+            playerHealth.AddToMaxHealth(baseModifier * stackCount);
         }
     }
     
-    void DropHealth()
+    void RemoveHealth(int stackCount)
     {
-        if (playerManager)
+        if (playerHealth)
         {
-            playerHealth.TakeFromMaxHealth(extraModifier);
+            playerHealth.TakeFromMaxHealth(baseModifier);
         }
-    }
-
-    void ExtraSpeed()
-    {
-        if (playerManager)
-        {
-            extraModifier = extraModifier/Mathf.Sqrt(Mathf.Sqrt(timesModifierUsed));
-            playerManager.speed *= (1 + extraModifier);
-        }
-    }    
-    
-    void DropSpeed()
-    {
-        if (playerManager)
-        {
-            playerManager.speed /= (1 + extraModifier);
-        }
-    }
-    
-    void ExtraCrit()
-    {
-        if (playerManager)
-        {
-            extraModifier = extraModifier/Mathf.Sqrt(Mathf.Sqrt(timesModifierUsed));
-            playerManager.critDamage *= (1 + extraModifier);
-        }
-    }    
-    void DropCrit()
-    {
-        if (playerManager)
-        {
-            playerManager.critDamage /= (1 + extraModifier);
-        }
-    }
-    
-    void ExtraDefense()
-    {
-        Debug.Log("Called:" + extraPerkType);
-        
-        if (playerManager)
-        {
-            Debug.Log(extraPerkType);
-            playerManager.armor = 5;
-            Debug.Log(playerManager.armor);
-        }
-    }    
-    
-    void DropDefense()
-    {
-        if (playerManager)
-        {
-            playerManager.armor /= (1 + extraModifier);
-        }
-    }
-    
-    //Others
-    
-    void LifeSteal()
-    {
-        Debug.Log(perkType);
-        Debug.Log("LifeSteal: " + extraPerkType);
     }
 
-    void SizeAttack()
+    void ApplySpeed(int stackCount)
     {
-        Debug.Log(perkType);
-        Debug.Log("SizeAttack: " + extraPerkType);
+        if (playerManager)
+        {
+            float totalModifier = CalculateTotalModifier(stackCount);
+            playerManager.speed = playerManager.initialSpeed * (1 + totalModifier);
+        }
     }    
     
-    void FlameTrail()
+    void RemoveSpeed(int stackCount)
     {
-        Debug.Log(perkType);
-        Debug.Log("FlameTrail: " + extraPerkType);
+        if (playerManager)
+        {
+            float totalModifier = CalculateTotalModifier(stackCount);
+            playerManager.speed = playerManager.initialSpeed * (1 + totalModifier);
+        }
     }
     
-    void DamageOverTime()
+    void ApplyCrit(int stackCount)
     {
-        Debug.Log(perkType);
-        Debug.Log("DamageOverTime: " + extraPerkType);
+        if (playerManager)
+        {
+            float totalModifier = CalculateTotalModifier(stackCount);
+            playerManager.critDamage = playerManager.initalCritDamage * (1 + totalModifier);
+        }
     }    
     
-    void SlowEnemies()
+    void RemoveCrit(int stackCount)
     {
-        Debug.Log(perkType);
-        Debug.Log("SlowEnemies: " + extraPerkType);
+        if (playerManager)
+        {
+            float totalModifier = CalculateTotalModifier(stackCount);
+            playerManager.critDamage = playerManager.initalCritDamage * (1 + totalModifier);
+        }
+    }
+    
+    void ApplyDefense(int stackCount)
+    {
+        if (playerManager)
+        {
+            float totalModifier = CalculateTotalModifier(stackCount);
+            playerManager.armor = playerManager.initialArmor + (baseModifier * totalModifier);
+        }
     }    
     
-    void EnemyExplode()
+    void RemoveDefense(int stackCount)
     {
-        Debug.Log(perkType);
-        Debug.Log("EnemyExplode: " + extraPerkType);
+        if (playerManager)
+        {
+            float totalModifier = CalculateTotalModifier(stackCount);
+            playerManager.armor = playerManager.initialArmor + (baseModifier * totalModifier);
+        }
+    }
+    
+    // Other Perks
+    void ApplyLifeSteal(int stackCount)
+    {
+        Debug.Log($"LifeSteal applied with {stackCount} stacks");
+    }
+    
+    void RemoveLifeSteal(int stackCount)
+    {
+        Debug.Log($"LifeSteal removed to {stackCount} stacks");
+    }
+
+    void ApplySizeAttack(int stackCount)
+    {
+        Debug.Log($"SizeAttack applied with {stackCount} stacks");
+    }    
+    
+    void RemoveSizeAttack(int stackCount)
+    {
+        Debug.Log($"SizeAttack removed to {stackCount} stacks");
+    }
+    
+    void ApplyFlameTrail(int stackCount)
+    {
+        Debug.Log($"FlameTrail applied with {stackCount} stacks");
+    }
+    
+    void RemoveFlameTrail(int stackCount)
+    {
+        Debug.Log($"FlameTrail removed to {stackCount} stacks");
+    }
+    
+    void ApplyDamageOverTime(int stackCount)
+    {
+        Debug.Log($"DamageOverTime applied with {stackCount} stacks");
+    }    
+    
+    void RemoveDamageOverTime(int stackCount)
+    {
+        Debug.Log($"DamageOverTime removed to {stackCount} stacks");
+    }
+    
+    void ApplySlowEnemies(int stackCount)
+    {
+        Debug.Log($"SlowEnemies applied with {stackCount} stacks");
+    }    
+    
+    void RemoveSlowEnemies(int stackCount)
+    {
+        Debug.Log($"SlowEnemies removed to {stackCount} stacks");
+    }
+    
+    void ApplyEnemyExplode(int stackCount)
+    {
+        Debug.Log($"EnemyExplode applied with {stackCount} stacks");
+    }
+    
+    void RemoveEnemyExplode(int stackCount)
+    {
+        Debug.Log($"EnemyExplode removed to {stackCount} stacks");
+    }
+    
+    private float CalculateTotalModifier(int stackCount)
+    {
+        float total = 0f;
+        for (int i = 1; i <= stackCount; i++)
+        {
+            // FIXED: Your original formula - each stack gives baseModifier / sqrt(sqrt(stackNumber))
+            total += baseModifier / Mathf.Sqrt(Mathf.Sqrt(i));
+        }
+        return total;
+    }
+    
+    public string GetPerkName()
+    {
+        if (perkType == PerkType.Extra)
+        {
+            return extraPerkType.ToString();
+        }
+        else
+        {
+            return otherPerkType.ToString();
+        }
     }
 }
