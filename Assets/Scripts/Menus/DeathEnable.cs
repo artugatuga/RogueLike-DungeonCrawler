@@ -24,4 +24,9 @@ public class DeathEnable : MonoBehaviour
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
     }
+    
+    public void Exit()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }
