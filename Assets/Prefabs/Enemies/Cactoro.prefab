@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6f1b8451cb6c4743976c0adc0c8b367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  projectilePrefab: {fileID: 7151078332018439628, guid: bcf38c86d66690e4f8b425fb33e6ab66, type: 3}
+  projectilePrefab: {fileID: 7753818075061568759, guid: 842bf792d47668b48a699560102b2c1a, type: 3}
   maxDistance: 20
   damage: 10
 --- !u!114 &7911690130601387311
