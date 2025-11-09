@@ -16,6 +16,7 @@ public class Healthbar : MonoBehaviour
         temporaryHealth = player.GetComponent<TemporaryHealth>();
         playerManager = player.GetComponent<PlayerManager>();
         temporaryHealth.OnHealthChanged.AddListener(OnHealthChanged);
+        OnHealthChanged();
     }
 
 
