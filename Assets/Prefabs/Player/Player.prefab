@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e320850f556f349b9876690cb4dc74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwordHit
-  PlayerManager: {fileID: 1327389360103736226}
+  PlayerManager: {fileID: 0}
 --- !u!114 &8681811077485710230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,10 +94,10 @@ GameObject:
   - component: {fileID: 1950208275596894281}
   - component: {fileID: 2734202536771428967}
   - component: {fileID: 5783015466412811377}
-  - component: {fileID: 1327389360103736226}
   - component: {fileID: 1489704615254217038}
-  - component: {fileID: 19356610895040462}
   - component: {fileID: 6619389759580047230}
+  - component: {fileID: 1563484408234118639}
+  - component: {fileID: 1327389360103736226}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -137,7 +137,7 @@ MonoBehaviour:
   rb: {fileID: 2734202536771428967}
   animator: {fileID: 8620524914534106914}
   Camera: {fileID: 0}
-  PlayerManager: {fileID: 19356610895040462}
+  PlayerManager: {fileID: 0}
 --- !u!136 &1950208275596894281
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -202,18 +202,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   hitBox: {fileID: 1616542577226624094}
   animator: {fileID: 8620524914534106914}
---- !u!114 &1327389360103736226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5244342150541677823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 009fbec0b2ec28446b5dab85c0e29c7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
 --- !u!114 &1489704615254217038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,18 +214,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95969b771eea4bc428fe46d2f7f2e408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PerkInteraction
---- !u!114 &19356610895040462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5244342150541677823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 009fbec0b2ec28446b5dab85c0e29c7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
 --- !u!114 &6619389759580047230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,6 +230,48 @@ MonoBehaviour:
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1563484408234118639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5244342150541677823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ed5d2d57903cd849b07989168537ba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inventory
+  slotUIExample: {fileID: 0}
+  dropedItemExample: {fileID: 0}
+  inventoryBackgroundUI: {fileID: 0}
+  inventoryItemExampleUI: {fileID: 0}
+  inventoryItemsUI: []
+  currentIventoryPerks: []
+  perksManagerUI: {fileID: 0}
+--- !u!114 &1327389360103736226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5244342150541677823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 009fbec0b2ec28446b5dab85c0e29c7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
+  <maxHealth>k__BackingField: 100
+  <initialArmor>k__BackingField: 0
+  <armor>k__BackingField: 0
+  <initalDamage>k__BackingField: 25
+  <damage>k__BackingField: 25
+  <initalCritDamage>k__BackingField: 25
+  <critDamage>k__BackingField: 25
+  <initialSize>k__BackingField: 1
+  <size>k__BackingField: 1
+  <initialSpeed>k__BackingField: 12
+  <speed>k__BackingField: 12
 --- !u!1001 &6411977671053411955
 PrefabInstance:
   m_ObjectHideFlags: 0

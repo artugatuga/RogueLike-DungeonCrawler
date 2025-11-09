@@ -13,10 +13,12 @@ public class PerksManagerUI : MonoBehaviour
     [SerializeField] private List<Perk> perksSelectionCards;
     [SerializeField] private List<GameObject> perksSelectionCardsUI;
     [SerializeField] private GameManager gameManager;
+    private Inventory inventory;
 
     private void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = FindFirstObjectByType<GameManager>();
+        inventory = FindFirstObjectByType<Inventory>();
     }
 
     public void ChangePerks(List<Perk> perksSelected)
@@ -49,7 +51,7 @@ public class PerksManagerUI : MonoBehaviour
     public void SelectPerk(int perkIndex)
     {
         perkMenuBackgroundUI.SetActive(false);
-        perksSelectionCards[perkIndex].CallPerkFunction();
+        inventory.AddToInventory(perksSelectionCards[perkIndex]);
         
         foreach (GameObject perk in perksSelectionCardsUI)
         {

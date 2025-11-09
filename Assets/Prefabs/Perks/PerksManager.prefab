@@ -44,9 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f98d0039117df840a48634f0757aa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Perk
-  perkType: 0
-  extraPerkType: 3
-  otherPerkType: 0
+  <perkType>k__BackingField: 0
+  <extraPerkType>k__BackingField: 3
+  <otherPerkType>k__BackingField: 0
+  extraModifier: 5
+  timesModifierUsed: 0
 --- !u!1 &364485383671262388
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,9 +93,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f98d0039117df840a48634f0757aa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Perk
-  perkType: 0
-  extraPerkType: 2
-  otherPerkType: 0
+  <perkType>k__BackingField: 0
+  <extraPerkType>k__BackingField: 2
+  <otherPerkType>k__BackingField: 0
+  extraModifier: 25
+  timesModifierUsed: 0
 --- !u!1 &1009315821138135019
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,9 +142,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f98d0039117df840a48634f0757aa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Perk
-  perkType: 0
-  extraPerkType: 0
-  otherPerkType: 4
+  <perkType>k__BackingField: 0
+  <extraPerkType>k__BackingField: 0
+  <otherPerkType>k__BackingField: 4
+  extraModifier: 0
+  timesModifierUsed: 0
 --- !u!1 &1235429127339064725
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,9 +191,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f98d0039117df840a48634f0757aa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Perk
-  perkType: 0
-  extraPerkType: 0
-  otherPerkType: 1
+  <perkType>k__BackingField: 0
+  <extraPerkType>k__BackingField: 0
+  <otherPerkType>k__BackingField: 1
+  extraModifier: 0
+  timesModifierUsed: 0
 --- !u!1 &1722357344388267243
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,9 +313,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f98d0039117df840a48634f0757aa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Perk
-  perkType: 0
-  extraPerkType: 1
-  otherPerkType: 0
+  <perkType>k__BackingField: 0
+  <extraPerkType>k__BackingField: 1
+  <otherPerkType>k__BackingField: 0
+  extraModifier: 0.2
+  timesModifierUsed: 0
 --- !u!1 &3123119350133123493
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,9 +362,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f98d0039117df840a48634f0757aa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Perk
-  perkType: 0
-  extraPerkType: 0
-  otherPerkType: 5
+  <perkType>k__BackingField: 0
+  <extraPerkType>k__BackingField: 0
+  <otherPerkType>k__BackingField: 5
+  extraModifier: 0
+  timesModifierUsed: 0
 --- !u!1 &4819294271842972687
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,9 +411,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f98d0039117df840a48634f0757aa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Perk
-  perkType: 0
-  extraPerkType: 0
-  otherPerkType: 2
+  <perkType>k__BackingField: 0
+  <extraPerkType>k__BackingField: 0
+  <otherPerkType>k__BackingField: 2
+  extraModifier: 0
+  timesModifierUsed: 0
 --- !u!1 &5920766126338270815
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,9 +460,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f98d0039117df840a48634f0757aa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Perk
-  perkType: 0
-  extraPerkType: 4
-  otherPerkType: 0
+  <perkType>k__BackingField: 0
+  <extraPerkType>k__BackingField: 4
+  <otherPerkType>k__BackingField: 0
+  extraModifier: 0.15
+  timesModifierUsed: 0
 --- !u!1 &6474625780326138297
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,6 +525,7 @@ MonoBehaviour:
   - {fileID: 4469341990480041827}
   maxPerksOnSelection: 3
   managerUI: {fileID: 0}
+  gameManager: {fileID: 0}
 --- !u!1 &6745990515256225268
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,9 +570,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f98d0039117df840a48634f0757aa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Perk
-  perkType: 0
-  extraPerkType: 5
-  otherPerkType: 0
+  <perkType>k__BackingField: 0
+  <extraPerkType>k__BackingField: 5
+  <otherPerkType>k__BackingField: 0
+  extraModifier: 0.1
+  timesModifierUsed: 0
 --- !u!1 &7525855350070295488
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,9 +619,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f98d0039117df840a48634f0757aa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Perk
-  perkType: 0
-  extraPerkType: 0
-  otherPerkType: 3
+  <perkType>k__BackingField: 0
+  <extraPerkType>k__BackingField: 0
+  <otherPerkType>k__BackingField: 3
+  extraModifier: 0
+  timesModifierUsed: 0
 --- !u!1 &9191313578526571611
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,6 +668,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f98d0039117df840a48634f0757aa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Perk
-  perkType: 0
-  extraPerkType: 0
-  otherPerkType: 6
+  <perkType>k__BackingField: 0
+  <extraPerkType>k__BackingField: 0
+  <otherPerkType>k__BackingField: 6
+  extraModifier: 0
+  timesModifierUsed: 0
