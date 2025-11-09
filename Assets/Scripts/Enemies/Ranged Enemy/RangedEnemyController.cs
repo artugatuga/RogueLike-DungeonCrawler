@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -59,8 +60,9 @@ public class RangedEnemyController : MonoBehaviour
     IEnumerator Attack()
     {
         isAttacking = true;
-        animator.SetTrigger(Shoot);
-        GameObject projectile = Instantiate(projectilePrefab, projectileSpawn.position, transform.rotation);
+        Vector3 spawnEuler = projectileSpawn.rotation.eulerAngles;
+        Quaternion rotation = Quaternion.Euler(90f, spawnEuler.y, spawnEuler.z);
+        GameObject projectile = Instantiate(projectilePrefab, projectileSpawn.position, rotation);
         ProjectileMovement projectileMovement = projectile.GetComponent<ProjectileMovement>();
         projectileMovement.damage = damage;
         projectileMovement.direction = transform.forward;
