@@ -35,7 +35,7 @@ void OnTriggerEnter(Collider other)
     amountOf = Mathf.RoundToInt((3 * Mathf.Sqrt(dificultyLevel)));
         if (dificultyLevel > 7)
         {
-            for (int i = 0; i < Random.Range(1,2); i++)
+            for (int i = 0; i < amountOf/4; i++)
             {
                 amountOfTank++;
                 amountOf--;
@@ -43,7 +43,7 @@ void OnTriggerEnter(Collider other)
         }
         if (dificultyLevel > 3)
         {
-            for (int i = 0; i < amountOf-amountOf/1.5; i++)
+            for (int i = 0; i < amountOf/2; i++)
             {
                 amountOfRange++;
                 amountOf--;

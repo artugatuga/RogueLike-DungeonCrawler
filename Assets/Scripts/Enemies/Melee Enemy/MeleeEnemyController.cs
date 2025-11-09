@@ -17,6 +17,9 @@ public class MeleeEnemyController : MonoBehaviour
     [SerializeField] private float attackCooldown = 3f;
     [SerializeField] private float attackDuration = 0.3f;
     
+    [SerializeField]private AudioSource audioSource;
+    [SerializeField]private AudioClip attackSound;
+    
     private float rotationSpeed = 5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -54,6 +57,9 @@ public class MeleeEnemyController : MonoBehaviour
 
     public IEnumerator Attack()
     {
+        audioSource.clip = attackSound;
+        audioSource.pitch = Random.Range(0.8f, 1.2f);
+        audioSource.Play();
         isAttacking = true;
         animator.SetTrigger(Attack1);
         Hitbox.SetActive(true);

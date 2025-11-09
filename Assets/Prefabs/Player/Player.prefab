@@ -315,6 +315,8 @@ MonoBehaviour:
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls: []
+  audioSource: {fileID: 1640453256633584101}
+  DeathSound: {fileID: 8300000, guid: 239147c92edad7e43ab4571400b5640d, type: 3}
   deathScreen: {fileID: 0}
 --- !u!114 &1563484408234118639
 MonoBehaviour:

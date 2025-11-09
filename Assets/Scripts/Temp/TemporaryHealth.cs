@@ -25,6 +25,11 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
 
     private bool dead = false;
     
+    [SerializeField]private AudioSource audioSource;
+    [SerializeField]private AudioClip DeathSound;
+    
+    
+    
     [SerializeField] private GameObject deathScreen;
     
     void Start()
@@ -120,6 +125,8 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
             animator.SetTrigger(Death);
             if (this.gameObject.CompareTag("Player") && !dead)
             {
+                audioSource.clip = DeathSound;
+                audioSource.Play();
                 dead = true;
                 animator.SetTrigger(Death);
                 deathScreen.SetActive(true);

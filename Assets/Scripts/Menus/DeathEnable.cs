@@ -12,7 +12,7 @@ public class DeathEnable : MonoBehaviour
         {
             canvasGroup = GetComponent<CanvasGroup>();
         }
-        LeanTween.value(gameObject, 0, 1f, 2.5f).setOnUpdate((float val) => canvasGroup.alpha = val);
+        LeanTween.value(gameObject, 0, 1f, 3.5f).setOnUpdate((float val) => canvasGroup.alpha = val);
     }
 
 
