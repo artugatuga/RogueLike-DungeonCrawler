@@ -15,18 +15,54 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
     private NavMeshAgent agent;
     private Animator animator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private PlayerManager playerManager;
+    
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
         OnTakeDamage.AddListener(CheckIfDead);
         agent = GetComponent<NavMeshAgent>();
+        playerManager = FindFirstObjectByType<PlayerManager>();
     }
+    
     public void TakeDamage(float damage, GameObject source)
     {
         Health -= damage;
+        
+        float maxHealth = 0;
+        if (playerManager)
+        {
+            maxHealth = playerManager.maxHealth;
+        }
+        
+        Health = Mathf.Clamp(Health, 0, maxHealth);
+        
         OnTakeDamage.Invoke();
+        
         Debug.Log(gameObject.name + " taking damage");
         Debug.LogWarning("Current Health: " + Health);
+    }
+    public void AddHealth(float addHealth)
+    {
+        Health += addHealth;
+        
+        float maxHealth = 0;
+        if (playerManager)
+        {
+            maxHealth = playerManager.maxHealth;
+        }
+        
+        Health = Mathf.Clamp(Health, 0, maxHealth);
+    }
+    
+    public void AddToMaxHealth(float addHealth)
+    {
+        playerManager.maxHealth += addHealth;
+    }
+    
+    public void TakeFromMaxHealth(float removeHealth)
+    {
+        playerManager.maxHealth -= removeHealth;
     }
 
     void CheckIfDead()

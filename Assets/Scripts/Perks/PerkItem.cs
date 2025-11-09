@@ -8,7 +8,7 @@ public class PerkItem : MonoBehaviour, IInteractable
     
     void Start()
     {
-        perksManager = FindObjectOfType<PerksManager>();
+        perksManager = FindFirstObjectByType<PerksManager>();
     }
 
     void IInteractable.Interact(GameObject source)
