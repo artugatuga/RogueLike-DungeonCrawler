@@ -104,7 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   projectilePrefab: {fileID: 7753818075061568759, guid: 842bf792d47668b48a699560102b2c1a, type: 3}
   maxDistance: 20
-  damage: 10
+  damage: 30
 --- !u!114 &7911690130601387311
 MonoBehaviour:
   m_ObjectHideFlags: 0
