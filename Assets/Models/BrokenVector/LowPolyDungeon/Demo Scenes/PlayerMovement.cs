@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]private AudioClip walkSound;
     private float soundTimer;
 
+    public bool dead = false;
+
     private void Awake()
     {
         Orientation = new Vector3(Camera.transform.forward.x, 0, Camera.transform.forward.z);
@@ -38,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (dead) return;
         Move();
         Look();
     }

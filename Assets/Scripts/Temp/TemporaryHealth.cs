@@ -9,6 +9,8 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
 {
     private static readonly int Death = Animator.StringToHash("Death");
 
+    public UnityEvent OnHealthChanged = new UnityEvent();
+    
     [SerializeField]
     private float Health = 100f;
     public UnityEvent OnTakeDamage;
@@ -25,11 +27,19 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
 
     private bool dead = false;
     
+    [SerializeField]private AudioSource audioSource;
+    [SerializeField]private AudioClip DeathSound;
+    
+    
+    
+    [SerializeField] private GameObject deathScreen;
+    
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
         OnTakeDamage.AddListener(CheckIfDead);
         playerManager = FindFirstObjectByType<PlayerManager>();
+        OnHealthChanged.Invoke();
         if (gameObject.CompareTag("Enemy"))
         {
             itemSpawner = gameObject.GetComponent<ItemSpawner>();
@@ -49,6 +59,7 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
         
         Health = Mathf.Clamp(Health, 0, maxHealth);
         
+        OnHealthChanged.Invoke();
         OnTakeDamage.Invoke();
         
         Debug.Log(gameObject.name + " taking damage");
@@ -116,11 +127,17 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
         if (Health <= 0f)
         {
             animator.SetTrigger(Death);
-            if (this.gameObject.CompareTag("Player"))
+            if (this.gameObject.CompareTag("Player") && !dead)
             {
-                
+                audioSource.clip = DeathSound;
+                audioSource.Play();
+                dead = true;
+                animator.SetTrigger(Death);
+                deathScreen.SetActive(true);
+                GetComponent<PlayerMovement>().dead = true;
+                GetComponent<PlayerAttack>().dead = true;
             }
-            if (this.gameObject.CompareTag("Enemy"))
+            if (this.gameObject.CompareTag("Enemy") && !dead)
             {
                 dead = true;
                 agent.isStopped = true;
@@ -148,5 +165,10 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
             if(!dead) agent.enabled = true;
             return;
         }
+    }
+
+    public float GetPlayerHealth()
+    {
+        return Health;
     }
 }

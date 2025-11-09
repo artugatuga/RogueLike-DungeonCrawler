@@ -174,8 +174,8 @@ GameObject:
   - component: {fileID: 6619389759580047230}
   - component: {fileID: 1563484408234118639}
   - component: {fileID: 1327389360103736226}
-  - component: {fileID: 110225143904113694}
-  - component: {fileID: 2104529736217451289}
+  - component: {fileID: 1640453256633584101}
+  - component: {fileID: 8417871384178755999}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -217,8 +217,9 @@ MonoBehaviour:
   animator: {fileID: 8620524914534106914}
   Camera: {fileID: 0}
   PlayerManager: {fileID: 1327389360103736226}
-  audioSource: {fileID: 110225143904113694}
+  audioSource: {fileID: 1640453256633584101}
   walkSound: {fileID: 8300000, guid: a34e9930020eb7b4bbd9648e896bda9e, type: 3}
+  dead: 0
 --- !u!136 &1950208275596894281
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -281,10 +282,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 986bc71f9ee8f824dbb32db2b4cfb47e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
-  hitBox: {fileID: 3857042398688731635}
-  audioSource: {fileID: 2104529736217451289}
+  hitBox: {fileID: 1616542577226624094}
+  audioSource: {fileID: 8417871384178755999}
   swordSound: {fileID: 8300000, guid: ec6b90b0e15398240a42cd72f3901398, type: 3}
   animator: {fileID: 8620524914534106914}
+  dead: 0
 --- !u!114 &1489704615254217038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,6 +316,9 @@ MonoBehaviour:
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls: []
+  audioSource: {fileID: 1640453256633584101}
+  DeathSound: {fileID: 8300000, guid: 239147c92edad7e43ab4571400b5640d, type: 3}
+  deathScreen: {fileID: 0}
 --- !u!114 &1563484408234118639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,7 +362,7 @@ MonoBehaviour:
   <size>k__BackingField: 1
   <initialSpeed>k__BackingField: 12
   <speed>k__BackingField: 12
---- !u!82 &110225143904113694
+--- !u!82 &1640453256633584101
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -454,7 +459,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!82 &2104529736217451289
+--- !u!82 &8417871384178755999
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
