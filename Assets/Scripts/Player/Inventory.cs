@@ -204,6 +204,7 @@ public class Inventory : MonoBehaviour
             
             // Spawn the dropped perk in world
             Vector3 newPosition = transform.position + transform.forward * 5;
+            newPosition.y = 0.5767174f;
             GameObject item = Instantiate(dropedItemExample, newPosition, Quaternion.identity, transform.parent);
             SpecificPerkItem itemComponent = item.GetComponent<SpecificPerkItem>();
             
