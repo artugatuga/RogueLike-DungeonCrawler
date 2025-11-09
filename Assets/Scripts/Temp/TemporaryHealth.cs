@@ -70,7 +70,6 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
     {
         if (Health <= 0f)
         {
-            agent.isStopped = true;
             animator.SetTrigger(Death);
             if (this.gameObject.CompareTag("Player"))
             {
@@ -78,6 +77,7 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
             }
             if (this.gameObject.CompareTag("Enemy"))
             {
+                agent.isStopped = true;
                 StartCoroutine(DestroyGameObject());
             }
         }

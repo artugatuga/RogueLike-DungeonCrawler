@@ -24,7 +24,7 @@ private bool finished = false;
 // Start is called before the first frame update
 void OnTriggerEnter(Collider other)
 {
-    if (!other.CompareTag("Player") || finished) return;
+    if (!other.CompareTag("Player") || started) return;
     
     doors = GameObject.FindGameObjectsWithTag("Door");
     foreach (GameObject door in doors)
