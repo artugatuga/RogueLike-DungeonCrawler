@@ -1,22 +1,22 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class TemporaryHealth : MonoBehaviour, IDamageable
 {
+    private static readonly int Death = Animator.StringToHash("Death");
+
     [SerializeField]
     private float Health = 100f;
     public UnityEvent OnTakeDamage;
+    
+    private Animator animator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         OnTakeDamage.AddListener(CheckIfDead);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     public void TakeDamage(float damage, GameObject source)
     {
@@ -30,14 +30,21 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
     {
         if (Health <= 0f)
         {
+            animator.SetTrigger(Death);
             if (this.gameObject.CompareTag("Player"))
             {
                 
             }
             if (this.gameObject.CompareTag("Enemy"))
             {
-                Destroy(this.gameObject);
+                StartCoroutine(DestroyGameObject());
             }
         }
+    }
+
+    IEnumerator DestroyGameObject()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(this.gameObject);
     }
 }

@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class RangedEnemyController : MonoBehaviour
 {
+    private static readonly int Shoot = Animator.StringToHash("Shoot");
+    private static readonly int isWalking = Animator.StringToHash("isWalking");
     private NavMeshAgent agent;
     private GameObject player;
     private bool isAttacking = false;
@@ -13,9 +16,13 @@ public class RangedEnemyController : MonoBehaviour
     
     private float rotationSpeed = 5f;
     
+    private Animator animator;
+    
     [SerializeField] private GameObject projectilePrefab;
     
     [SerializeField] private float maxDistance = 10f;
+    
+    [SerializeField] private float damage = 10f;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,18 +30,23 @@ public class RangedEnemyController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
         projectileSpawn = transform.Find("ProjectileSpawn");
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (player == null) return;
-        agent.destination = player.transform.position;
-
         agent.isStopped = (Vector3.Distance(player.transform.position, agent.transform.position) <= maxDistance);
+
+        if (!agent.isStopped)
+        {
+            animator.SetBool(isWalking, true);
+            agent.destination = player.transform.position;
+        }
 
         if (agent.isStopped)
         {
+            animator.SetBool(isWalking, false);
             LookAtPlayer();
 
             if (!isAttacking)
@@ -47,8 +59,11 @@ public class RangedEnemyController : MonoBehaviour
     IEnumerator Attack()
     {
         isAttacking = true;
+        animator.SetTrigger(Shoot);
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawn.position, transform.rotation);
-        projectile.GetComponent<ProjectileMovement>().direction = transform.forward;
+        ProjectileMovement projectileMovement = projectile.GetComponent<ProjectileMovement>();
+        projectileMovement.damage = damage;
+        projectileMovement.direction = transform.forward;
         yield return new WaitForSeconds(2f);
         isAttacking = false;
     }

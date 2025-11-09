@@ -5,9 +5,9 @@ using UnityEngine.UI;
 public class ProjectileMovement : MonoBehaviour
 {
     [SerializeField] private float speed = 15f;
-    [SerializeField] private float damage = 10f;
     [SerializeField] private float lifetime = 5f;
 
+    public float damage;
     public Vector3 direction;
     
     private Transform target;
@@ -32,7 +32,11 @@ public class ProjectileMovement : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (!other.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+            return;
+        }
         
         IDamageable damageable = other.GetComponent<IDamageable>();
 
