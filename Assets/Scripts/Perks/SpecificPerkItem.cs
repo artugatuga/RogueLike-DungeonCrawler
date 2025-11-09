@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SpecificPerkItem : MonoBehaviour, IInteractable
+public class SpecificPerkItem : Singleton<SpecificPerkItem>, IInteractable
 {
     private Perk perkData;
     private Inventory inventory;

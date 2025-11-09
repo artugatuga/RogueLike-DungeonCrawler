@@ -3265,11 +3265,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1870498826731455464, guid: c53d34267ccf6554ba040b80ddb80b70, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -965.4471
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1870498826731455464, guid: c53d34267ccf6554ba040b80ddb80b70, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -539.9881
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1870498826731455464, guid: c53d34267ccf6554ba040b80ddb80b70, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3281,6 +3281,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1870498826731455464, guid: c53d34267ccf6554ba040b80ddb80b70, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637957684579219682, guid: c53d34267ccf6554ba040b80ddb80b70, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979494585594259558, guid: c53d34267ccf6554ba040b80ddb80b70, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 133.9349
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979494585594259558, guid: c53d34267ccf6554ba040b80ddb80b70, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 132.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979494585594259558, guid: c53d34267ccf6554ba040b80ddb80b70, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.0000076293945
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979494585594259558, guid: c53d34267ccf6554ba040b80ddb80b70, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5864577842831335041, guid: c53d34267ccf6554ba040b80ddb80b70, type: 3}
@@ -4459,7 +4479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -4488,7 +4508,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -4671,6 +4691,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1994710175}
   m_SourcePrefab: {fileID: 100100000, guid: 20f2ea214cfe0d748b1b4b8ad965af69, type: 3}
+--- !u!4 &1243023102 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 974505260467900969, guid: 20ffc03e150b34e41aef6d134fa46637, type: 3}
+  m_PrefabInstance: {fileID: 148364978}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1248499667
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7163,10 +7188,10 @@ PrefabInstance:
     - target: {fileID: 5787591065926551398, guid: 35aa42d5e8d52b345a02a53f2bab2544, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1243023102}
     - target: {fileID: 7697282262093279818, guid: 35aa42d5e8d52b345a02a53f2bab2544, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -41.57117
+      value: -31.933628
       objectReference: {fileID: 0}
     - target: {fileID: 7697282262093279818, guid: 35aa42d5e8d52b345a02a53f2bab2544, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7174,7 +7199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7697282262093279818, guid: 35aa42d5e8d52b345a02a53f2bab2544, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -25.851171
+      value: -22.996984
       objectReference: {fileID: 0}
     - target: {fileID: 7697282262093279818, guid: 35aa42d5e8d52b345a02a53f2bab2544, type: 3}
       propertyPath: m_LocalRotation.w
