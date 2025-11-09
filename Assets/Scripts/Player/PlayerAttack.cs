@@ -10,6 +10,9 @@ public class PlayerAttack : MonoBehaviour
     private float attackTimer;
     private bool canAttack = true;
     
+    [SerializeField]private AudioSource audioSource;
+    [SerializeField]private AudioClip swordSound;
+    
     [SerializeField] Animator animator;
 
 
@@ -24,6 +27,10 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Mouse.current.leftButton.isPressed && canAttack)
         {
+            audioSource.clip = swordSound;
+            audioSource.pitch = Random.Range(0.8f, 1.2f);
+            audioSource.Play();
+            
             animator.SetBool(CanPlayAnimation, true);
             hitBox.SetActive(true);
             canAttack = false;

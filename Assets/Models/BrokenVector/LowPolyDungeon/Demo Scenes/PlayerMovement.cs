@@ -4,6 +4,7 @@ using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,6 +17,10 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 Orientation;
     
     [SerializeField] private PlayerManager PlayerManager;
+
+    [SerializeField]private AudioSource audioSource;
+    [SerializeField]private AudioClip walkSound;
+    private float soundTimer;
 
     private void Awake()
     {
@@ -50,14 +55,12 @@ public class PlayerMovement : MonoBehaviour
             //rb.AddForce((Camera.transform.forward * acceleration * Time.deltaTime), ForceMode.VelocityChange);
             //transform.position += Camera.transform.forward * acceleration * Time.deltaTime;
             moveVertical += 1;
-            animator.SetBool(Moving, true);
         }
         if (Keyboard.current.sKey.isPressed)
         {
             //rb.AddForce((-Camera.transform.forward * acceleration * Time.deltaTime), ForceMode.VelocityChange);
             //transform.position -= Camera.transform.forward * acceleration * Time.deltaTime;
             moveVertical -= 1;
-            animator.SetBool(Moving, true);
         }
         
         if (Keyboard.current.aKey.isPressed)
@@ -65,18 +68,30 @@ public class PlayerMovement : MonoBehaviour
             //rb.AddForce((-Camera.transform.right * acceleration * Time.deltaTime), ForceMode.Acceleration);
             //transform.position -= Camera.transform.right * acceleration * Time.deltaTime;
             moveHorizontal -= 1;
-            animator.SetBool(Moving, true);
         }
         if (Keyboard.current.dKey.isPressed)
         {
             //rb.AddForce((Camera.transform.right * acceleration * Time.deltaTime), ForceMode.VelocityChange);
             //transform.position += Camera.transform.right * acceleration * Time.deltaTime;
             moveHorizontal += 1;
-            animator.SetBool(Moving, true);
         }
         moveHorizontal *= PlayerManager.speed;
         moveVertical *= PlayerManager.speed;
         movement = new Vector3(moveHorizontal/2, 0, moveVertical);
+        if (movement != Vector3.zero)
+        {
+            animator.SetBool(Moving, true);
+            soundTimer += Time.deltaTime;
+
+            if (soundTimer >= 0.4)
+            {
+                audioSource.clip = walkSound;
+                audioSource.pitch = Random.Range(0.8f, 1.2f);
+                audioSource.Play();
+
+                soundTimer = 0f;
+            }
+        }
         Quaternion rotation = Quaternion.Euler(0f, +45f, 0f);
         movement = rotation * movement;
         

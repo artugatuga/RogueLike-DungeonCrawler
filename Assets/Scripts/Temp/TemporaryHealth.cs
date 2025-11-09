@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -135,5 +136,17 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(1f);
         itemSpawner.SpawnItem();
         Destroy(this.gameObject);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (gameObject.CompareTag("Enemy"))
+        {
+            playKock = false;
+            kockBackPos = 0;
+            agent.Warp(transform.position);
+            if(!dead) agent.enabled = true;
+            return;
+        }
     }
 }
