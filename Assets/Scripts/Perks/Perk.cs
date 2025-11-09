@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum PerkType { Extra, Other };
 public enum ExtraPerkType { None, Damage, Health, Defense, Crit, Speed };
@@ -12,6 +13,8 @@ public class Perk : MonoBehaviour
     [field:SerializeField] public OtherPerkType otherPerkType { get; set; }
     
     [SerializeField] private float baseModifier;
+
+    [field:SerializeField] public Sprite image { get; set; }
     
     private PlayerManager playerManager;
     private TemporaryHealth playerHealth;

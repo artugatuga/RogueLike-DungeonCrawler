@@ -29,14 +29,14 @@ public class PerksManagerUI : MonoBehaviour
             currentPerk.name = perksSelected[i].name;
             currentPerk.SetActive(true);
 
-            float size = 1200;
+            float size = 1400;
             
             RectTransform parentRect = perkMenuBackgroundUI.GetComponent<RectTransform>();
             Vector3 parentPosition = parentRect.position;
             Vector3 newPosition = new Vector3(parentPosition.x - (size/perksSelected.Count * (i - 1)), parentPosition.y, parentPosition.z);
             
             currentPerk.transform.position = new Vector3(newPosition.x, newPosition.y, newPosition.z);
-            currentPerk.GetComponentInChildren<TextMeshProUGUI>().text = currentPerk.name;
+            currentPerk.GetComponent<Image>().sprite = perksSelected[i].image;
             
             int index = i;
             currentPerk.GetComponentInChildren<Button>().onClick.AddListener(() => SelectPerk(index));
