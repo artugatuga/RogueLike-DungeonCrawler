@@ -184,17 +184,25 @@ public class Perk : MonoBehaviour
         }
     }
     
-    // Other Perks
     void ApplyLifeSteal(int stackCount)
     {
-        Debug.Log($"LifeSteal applied with {stackCount} stacks");
+        if (playerManager)
+        {
+            float totalModifier = CalculateTotalModifier(stackCount);
+            playerManager.lifeSteal = playerManager.initialLifeSeteal + (baseModifier * totalModifier);
+        }
     }
     
     void RemoveLifeSteal(int stackCount)
     {
-        Debug.Log($"LifeSteal removed to {stackCount} stacks");
+        if (playerManager)
+        {
+            float totalModifier = CalculateTotalModifier(stackCount);
+            playerManager.lifeSteal = playerManager.initialLifeSeteal + (baseModifier * totalModifier);
+        }
     }
 
+    // Other Perks
     void ApplySizeAttack(int stackCount)
     {
         Debug.Log($"SizeAttack applied with {stackCount} stacks");
