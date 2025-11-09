@@ -68,7 +68,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StartRoom
   dificultyLevel: 1
   slimePrefab: {fileID: 3989618142775912863, guid: 817cd922a32759a4a8ef7dd01baea27c, type: 3}
-  tankPrefab: {fileID: 0}
+  tankPrefab: {fileID: 8068905352189930151, guid: 547c97029854c3a4d9bf984eafc2b95f, type: 3}
   cactusPrefab: {fileID: 2014983961438189676, guid: 44aac20ebf1743a4391a4a4ffe087fc5, type: 3}
   enemyParent: {fileID: 0}
   arenaBox: {fileID: 3853377270237770492}

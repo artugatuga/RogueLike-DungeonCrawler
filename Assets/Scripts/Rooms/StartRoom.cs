@@ -14,12 +14,23 @@ private int amountOfMelee;
 private int amountOfTank;
 private int amountOfRange;
 
+private GameObject[] doors;
+
+private bool started = false;
+private bool finished = false;
+
 
 
 // Start is called before the first frame update
 void OnTriggerEnter(Collider other)
 {
-    if (!other.CompareTag("Player")) return;
+    if (!other.CompareTag("Player") || finished) return;
+    
+    doors = GameObject.FindGameObjectsWithTag("Door");
+    foreach (GameObject door in doors)
+    {
+        door.GetComponent<CloseAndOpenDoor>().Close();
+    }
     
     amountOf = Mathf.RoundToInt((3 * Mathf.Sqrt(dificultyLevel)));
         if (dificultyLevel > 7)
@@ -44,8 +55,20 @@ void OnTriggerEnter(Collider other)
         }
         
         StartThisRoom();
+        started = true;
 }
 
+void Update()
+{
+    if (enemyParent.transform.childCount <= 0 && started && !finished)
+    {
+        finished = true;
+        foreach (GameObject door in doors)
+        {
+            door.GetComponent<CloseAndOpenDoor>().Open();
+        }
+    }
+}
 
 void StartThisRoom()
 {
@@ -67,6 +90,8 @@ void StartThisRoom()
         Instantiate(tankPrefab, GetRandomPosition() + Vector3.up*4, Quaternion.identity ,enemyParent.transform);
         amountOfTank--;
     }
+    
+    
 }
 
 public Vector3 GetRandomPosition()
