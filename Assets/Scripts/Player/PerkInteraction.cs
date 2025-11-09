@@ -10,6 +10,7 @@ public class PerkInteraction : MonoBehaviour
         if (interactable != null)
         {
             interactable.Interact(gameObject);
+            Destroy(other.gameObject);
         }
     }
 }

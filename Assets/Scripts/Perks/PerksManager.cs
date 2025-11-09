@@ -15,7 +15,7 @@ public class PerksManager : MonoBehaviour
 
     private void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = FindFirstObjectByType<GameManager>();
     }
 
     public void RandomizePerkSelection()
