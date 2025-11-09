@@ -13,9 +13,15 @@ public class PerksManager : MonoBehaviour
     [SerializeField] private PerksManagerUI managerUI;
     [SerializeField] private GameManager gameManager;
 
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+    
     private void Start()
     {
         gameManager = FindFirstObjectByType<GameManager>();
+        managerUI = FindFirstObjectByType<PerksManagerUI>();
     }
 
     public void RandomizePerkSelection()
@@ -59,6 +65,8 @@ public class PerksManager : MonoBehaviour
         {
             selectedPerksList.Add(perks[perk]);
         }
+         
+        if(managerUI == null) managerUI = FindFirstObjectByType<PerksManagerUI>();
         
         managerUI.ChangePerks(selectedPerksList);
     }

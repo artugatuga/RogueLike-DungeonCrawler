@@ -33,8 +33,11 @@ public class Inventory : MonoBehaviour
     {
         string perkKey = GetPerkKey(perk);
         
+        Debug.Log("Inventory");
+        
         if (!perkStacks.ContainsKey(perkKey))
         {
+            Debug.Log("Contains");
             perkStacks[perkKey] = new List<Perk>();
         }
         

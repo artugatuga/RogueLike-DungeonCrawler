@@ -3,18 +3,20 @@ using UnityEngine;
 
 public class PerkInteraction : MonoBehaviour
 {
-    [SerializeField] private Collider mainCollider;
-    
     private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.CompareTag("Perk")) return;
         
+        Debug.Log(other.gameObject.name);
+        
         IInteractable interactable = other.GetComponent<IInteractable>();
+        
+        Debug.Log(interactable);
         
         if (interactable != null)
         {
+            Debug.Log("CalledInteract");
             interactable.Interact(gameObject);
-            Destroy(other.gameObject);
         }
     }
 }
