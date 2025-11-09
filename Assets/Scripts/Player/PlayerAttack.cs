@@ -15,10 +15,13 @@ public class PlayerAttack : MonoBehaviour
     
     [SerializeField] Animator animator;
 
+    public bool dead = false;
+
 
     // Update is called once per frame
     void Update()
     {
+        if(dead) return;
         Attack();
         Timers();
     }

@@ -25,6 +25,8 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
 
     private bool dead = false;
     
+    [SerializeField] private GameObject deathScreen;
+    
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
@@ -116,11 +118,15 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
         if (Health <= 0f)
         {
             animator.SetTrigger(Death);
-            if (this.gameObject.CompareTag("Player"))
+            if (this.gameObject.CompareTag("Player") && !dead)
             {
-                
+                dead = true;
+                animator.SetTrigger(Death);
+                deathScreen.SetActive(true);
+                GetComponent<PlayerMovement>().dead = true;
+                GetComponent<PlayerAttack>().dead = true;
             }
-            if (this.gameObject.CompareTag("Enemy"))
+            if (this.gameObject.CompareTag("Enemy") && !dead)
             {
                 dead = true;
                 agent.isStopped = true;
