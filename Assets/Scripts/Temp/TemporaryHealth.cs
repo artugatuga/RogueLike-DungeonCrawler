@@ -18,6 +18,11 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
     private Animator animator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private PlayerManager playerManager;
+
+    private float kockBackPos;
+    private bool playKock;
+
+    private bool dead = false;
     
     void Start()
     {
@@ -48,6 +53,10 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
         Debug.Log(gameObject.name + " taking damage");
         Debug.LogWarning("Current Health: " + Health);
         // if (gameObject.CompareTag("Enemy")) GetComponent<Rigidbody>().linearVelocity = transform.forward * -100f;
+        if (gameObject.CompareTag("Enemy"))
+        {
+            playKock = true;
+        }
     }
     public void AddHealth(float addHealth)
     {
@@ -66,6 +75,35 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
     {
         playerManager.maxHealth += addHealth;
     }
+
+    void Update()
+    {
+        if (playKock)
+        {
+            EnemyKnockBack();
+        }
+    }
+    
+    void EnemyKnockBack()
+    {
+        float previousPos = kockBackPos;
+        
+        kockBackPos += Time.deltaTime * 10;
+        
+        float delta = kockBackPos - previousPos;
+        agent.enabled = false;
+        if (kockBackPos >= 5)
+        {
+            playKock = false;
+            kockBackPos = 0;
+            agent.Warp(transform.position);
+            if(!dead) agent.enabled = true;
+            return;
+        }
+        
+        
+        transform.position -= transform.forward * delta;
+    }
     
     public void TakeFromMaxHealth(float removeHealth)
     {
@@ -83,6 +121,8 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
             }
             if (this.gameObject.CompareTag("Enemy"))
             {
+                dead = true;
+                agent.enabled = false;
                 agent.isStopped = true;
                 agent.enabled = false;
                 StartCoroutine(DestroyGameObject());
@@ -92,7 +132,7 @@ public class TemporaryHealth : MonoBehaviour, IDamageable
 
     IEnumerator DestroyGameObject()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         itemSpawner.SpawnItem();
         Destroy(this.gameObject);
     }

@@ -30,7 +30,8 @@ public class MeleeEnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (agent.enabled == false) return;
+        
         agent.isStopped = Vector3.Distance(transform.position, player.transform.position) < agent.radius * 3f;
 
         if (!agent.isStopped)
