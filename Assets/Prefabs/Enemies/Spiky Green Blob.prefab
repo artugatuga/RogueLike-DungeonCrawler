@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   perkItemPrefab: {fileID: 3509464816072538751, guid: 5063571c93625b54f9e2eebd5c4c1784, type: 3}
-  dropChance: 10
+  dropChance: 70
 --- !u!82 &8581814894696081021
 AudioSource:
   m_ObjectHideFlags: 0
