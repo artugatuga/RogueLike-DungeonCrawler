@@ -9,6 +9,9 @@ public class StartRoom : MonoBehaviour
 [SerializeField] private GameObject enemyParent;
 [SerializeField] private BoxCollider arenaBox;
 
+[SerializeField] private bool finalRoom = false;
+[SerializeField] private GameObject ending;
+
 private int amountOf;
 private int amountOfMelee;
 private int amountOfTank;
@@ -66,6 +69,11 @@ void Update()
         foreach (GameObject door in doors)
         {
             door.GetComponent<CloseAndOpenDoor>().Open();
+        }
+
+        if (finalRoom)
+        {
+            ending.SetActive(true);
         }
     }
 }

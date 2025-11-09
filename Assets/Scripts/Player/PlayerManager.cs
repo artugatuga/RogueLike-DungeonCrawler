@@ -6,9 +6,9 @@ public class PlayerManager : MonoBehaviour
     public float maxHealth { get; set; } = 100;
     
     [field:SerializeField]
-    public float initialArmor { get; set; } = 0;
+    public float initialArmor { get; set; } = 1;
     [field:SerializeField]
-    public float armor { get; set; } = 0;
+    public float armor { get; set; } = 1;
     
     [field:SerializeField]
     public float initalDamage { get; set; } = 25;
