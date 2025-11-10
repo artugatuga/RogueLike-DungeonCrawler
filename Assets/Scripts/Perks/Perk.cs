@@ -188,8 +188,8 @@ public class Perk : MonoBehaviour
     {
         if (playerManager)
         {
-            float totalModifier = CalculateTotalModifier(stackCount);
-            playerManager.lifeSteal = playerManager.initialLifeSeteal + (baseModifier * totalModifier);
+            float totalModifier = CalculateTotalModifier(stackCount+1);
+            playerManager.lifeSteal = playerManager.initialLifeSteal + (baseModifier * totalModifier);
         }
     }
     
@@ -198,7 +198,7 @@ public class Perk : MonoBehaviour
         if (playerManager)
         {
             float totalModifier = CalculateTotalModifier(stackCount);
-            playerManager.lifeSteal = playerManager.initialLifeSeteal + (baseModifier * totalModifier);
+            playerManager.lifeSteal = playerManager.initialLifeSteal + (baseModifier * totalModifier);
         }
     }
 

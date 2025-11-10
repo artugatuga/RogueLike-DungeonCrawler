@@ -31,7 +31,7 @@ public class PlayerManager : MonoBehaviour
     public float speed { get; set; } = 12f;
     
     [field:SerializeField]
-    public float initialLifeSeteal{ get; set; } = 12f;
+    public float initialLifeSteal{ get; set; } = 0f;
     [field:SerializeField]
-    public float lifeSteal { get; set; } = 12f;
+    public float lifeSteal { get; set; } = 0f;
 }

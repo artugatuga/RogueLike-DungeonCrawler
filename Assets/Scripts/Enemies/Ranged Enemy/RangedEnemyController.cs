@@ -37,6 +37,8 @@ public class RangedEnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (agent.enabled == false) return;
+        
         agent.isStopped = (Vector3.Distance(player.transform.position, agent.transform.position) <= maxDistance);
 
         if (!agent.isStopped)

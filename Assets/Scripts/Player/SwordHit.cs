@@ -10,7 +10,7 @@ public class SwordHit : MonoBehaviour
     [SerializeField] private AudioClip hitSound;
     private float crit = 0;
     private float size = 1;
-    private float lifeSteal = 1;
+    private float lifeSteal = 0;
     private GameObject enemyHit;
     [SerializeField] private GameObject player;
 
